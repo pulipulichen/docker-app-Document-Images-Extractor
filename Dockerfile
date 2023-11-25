@@ -6,7 +6,7 @@ RUN apt-get install -y \
     poppler-utils
 
 RUN apt-get install -y \
-    unzip
+    unzip unoconv zip
 
 # COPY package.json /
 # RUN npm install

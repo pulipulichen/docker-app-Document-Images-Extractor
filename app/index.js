@@ -142,29 +142,56 @@ let processSingleODF = async function (file) {
   }
   else if (fs.existsSync(`${outputDocFolder}/Pictures/`)) {
     cmd = `mv "${outputDocFolder}/Pictures/"* "${outputFolder}"`
-  } 
+  }
+  else {
+    cmd = false
+  }
   // console.log(cmd)
-  try {
-    result = await ShellExec(cmd)
+  if (cmd !== false) {
+    try {
+      result = await ShellExec(cmd)
+    }
+    catch (e) {
+      console.error(e)
+    }
+
+    // ----------------------------------------------------------------
+
+    prependFilenameInFolder(filenameNoExt, outputFolder)
+
+    // ----------------------------------------------------------------
+
+
+    cmd = `rm -rf "${outputDocFolder}"`
+    try {
+      result = await ShellExec(cmd)
+    }
+    catch (e) {
+      console.error(e)
+    }
   }
-  catch (e) {
-    console.error(e)
+  else {
+    cmd = `unoconv -f pdf "${file}"`
+
+    try {
+      result = await ShellExec(cmd)
+    }
+    catch (e) {
+      console.error(e)
+    }
+
+    let pdfFile = file
+    if (pdfFile.slice(-4, -3) === '.') {
+      pdfFile = pdfFile.slice(0, -4) + '.pdf'
+    }
+    else if (pdfFile.slice(-5, -4) === '.') {
+      pdfFile = pdfFile.slice(0, -5) + '.pdf'
+    }
+    await processSinglePDF(pdfFile)
+
+    fs.unlinkSync(pdfFile)
   }
 
-  // ----------------------------------------------------------------
-
-  prependFilenameInFolder(filenameNoExt, outputFolder)
-
-  // ----------------------------------------------------------------
-
-
-  cmd = `rm -rf "${outputDocFolder}"`
-  try {
-    // result = await ShellExec(cmd)
-  }
-  catch (e) {
-    console.error(e)
-  }
 }
 
 let processSingleOffice = async function (file) {
