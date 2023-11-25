@@ -50,10 +50,16 @@ let processDir = async function (directoryPath) {
     else if (file.endsWith('.odt') || file.endsWith('.ods') || file.endsWith('.odp') || file.endsWith('.odg')) {
       await processSingleODF(path.join(directoryPath, file))
     }
+    else if (file.endsWith('.docx') || file.endsWith('.xlsx') || file.endsWith('.pptx') || file.endsWith('.odg')) {
+      await processSingleOffice(file)
+    }
 
     let filenameNoExt = path.basename(file)
     if (filenameNoExt.slice(-4, -3) === '.') {
       filenameNoExt = filenameNoExt.slice(0, -4)
+    }
+    else if (filenameNoExt.slice(-5, -4) === '.') {
+      filenameNoExt = filenameNoExt.slice(0, -5)
     }
 
     if (filename === filenameNoExt) {
