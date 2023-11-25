@@ -42,10 +42,10 @@ let processDir = async function (directoryPath) {
   for (let i = 0; i < files.length; i++) {
     let file = files[i];
     if (file.endsWith('.pdf')) {
-      await processSinglePDF(file)
+      await processSinglePDF(path.join(directoryPath, file))
     }
     else if (file.endsWith('.odt') || file.endsWith('.ods') || file.endsWith('.odp') || file.endsWith('.odg')) {
-      await processSingleODF(file)
+      await processSingleODF(path.join(directoryPath, file))
     }
 
     let filenameNoExt = path.basename(file)
