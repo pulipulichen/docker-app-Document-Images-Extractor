@@ -64,7 +64,7 @@ let processSingleODF = async function (file) {
     console.error(e)
   }
 
-  prependFilenameInFolder(filenameNoExt, outputFolder)
+  // prependFilenameInFolder(filenameNoExt, outputFolder)
 }
 
 let prependFilenameInFolder = function (prepend, directoryPath) {
