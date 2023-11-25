@@ -18,6 +18,9 @@ let main = async function () {
     else if (file.endsWith('.odt') || file.endsWith('.ods') || file.endsWith('.odp') || file.endsWith('.odg')) {
       await processSingleODF(file)
     }
+    else if (file.endsWith('.docx') || file.endsWith('.xlsx') || file.endsWith('.pptx') || file.endsWith('.odg')) {
+      await processSingleOffice(file)
+    }
   }
 }
 
@@ -131,9 +134,68 @@ let processSingleODF = async function (file) {
   if (fs.existsSync(`${outputDocFolder}/media/`)) {
     cmd = `mv "${outputDocFolder}/media/"* "${outputFolder}"`
   }
-  if (fs.existsSync(`${outputDocFolder}/Pictures/`)) {
+  else if (fs.existsSync(`${outputDocFolder}/Pictures/`)) {
     cmd = `mv "${outputDocFolder}/Pictures/"* "${outputFolder}"`
   } 
+  // console.log(cmd)
+  try {
+    result = await ShellExec(cmd)
+  }
+  catch (e) {
+    console.error(e)
+  }
+
+  // ----------------------------------------------------------------
+
+  prependFilenameInFolder(filenameNoExt, outputFolder)
+
+  // ----------------------------------------------------------------
+
+
+  cmd = `rm -rf "${outputDocFolder}"`
+  try {
+    result = await ShellExec(cmd)
+  }
+  catch (e) {
+    console.error(e)
+  }
+}
+
+let processSingleOffice = async function (file) {
+  let filename = path.basename(file)
+  // let dirname = path.dirname(file)
+  let filenameNoExt = filename
+  if (filenameNoExt.slice(-5, -4) === '.') {
+    filenameNoExt = filenameNoExt.slice(0, -5)
+  }
+
+  let outputFolder = `/output/${filenameNoExt}/`
+  let outputDocFolder = `/output/${filenameNoExt}-doc/`
+  fs.mkdirSync(outputFolder, {recursive: true})
+  fs.mkdirSync(outputDocFolder, {recursive: true})
+
+  let result
+  
+  let cmd = `unzip "${file}" -d "${outputDocFolder}"`
+  console.log(cmd)
+  try {
+    result = await ShellExec(cmd)
+  }
+  catch (e) {
+    console.error(e)
+  }
+
+  // ----------------------------------------------------------------
+
+  if (fs.existsSync(`${outputDocFolder}/word/`)) {
+    cmd = `mv "${outputDocFolder}/word/media/"* "${outputFolder}"`
+  }
+  else if (fs.existsSync(`${outputDocFolder}/xl/`)) {
+    cmd = `mv "${outputDocFolder}/xl/media/"* "${outputFolder}"`
+  }
+  else if (fs.existsSync(`${outputDocFolder}/ppt/`)) {
+    cmd = `mv "${outputDocFolder}/ppt/media/"* "${outputFolder}"`
+  }
   // console.log(cmd)
   try {
     result = await ShellExec(cmd)
