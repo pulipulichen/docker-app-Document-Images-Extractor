@@ -57,7 +57,7 @@ let processDir = async function (directoryPath) {
       continue
     }
 
-    let cmd = `mv "/output/${filenameNoExt}/*" "/output/${filename}"`
+    let cmd = `mv "/output/${filenameNoExt}/"* "/output/${filename}"`
     console.log(cmd)
     try {
       result = await ShellExec(cmd)
