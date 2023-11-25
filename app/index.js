@@ -171,6 +171,14 @@ let processSingleODF = async function (file) {
     }
   }
   else {
+    cmd = `rm -rf "${outputDocFolder}"`
+    try {
+      result = await ShellExec(cmd)
+    }
+    catch (e) {
+      console.error(e)
+    }
+
     cmd = `unoconv -f pdf "${file}"`
 
     try {
