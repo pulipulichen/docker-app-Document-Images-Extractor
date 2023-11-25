@@ -126,7 +126,7 @@ let processSingleODF = async function (file) {
 
   let result
   
-  let cmd = `unzip "${file}" -d "${outputDocFolder}"`
+  let cmd = `unzip -o "${file}" -d "${outputDocFolder}"`
   console.log(cmd)
   try {
     result = await ShellExec(cmd)
@@ -182,7 +182,7 @@ let processSingleOffice = async function (file) {
 
   let result
   
-  let cmd = `unzip "${file}" -d "${outputDocFolder}"`
+  let cmd = `unzip -o "${file}" -d "${outputDocFolder}"`
   console.log(cmd)
   try {
     result = await ShellExec(cmd)
