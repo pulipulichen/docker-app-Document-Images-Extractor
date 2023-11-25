@@ -9,7 +9,10 @@ let main = async function () {
 
   for (let i = 0; i < files.length; i++) {
     let file = files[i]
-    if (file.endsWith('.pdf')) {
+    if (isDirectory(file)) {
+      await processDir(file)
+    }
+    else if (file.endsWith('.pdf')) {
       await processSinglePDF(file)
     }
     else if (file.endsWith('.odt') || file.endsWith('.ods') || file.endsWith('.odp') || file.endsWith('.odg')) {
@@ -17,6 +20,62 @@ let main = async function () {
     }
   }
 }
+
+function isDirectory(path) {
+  try {
+    const stats = fs.statSync(path);
+    return stats.isDirectory();
+  } catch (err) {
+    // Handle potential errors, e.g., path does not exist or is inaccessible
+    console.error(`Error checking if ${path} is a directory:`, err);
+    return false;
+  }
+}
+
+let processDir = async function (directoryPath) {
+  let filename = path.basename(directoryPath)
+  let outputFolder = `/output/${filename}/`
+  fs.mkdirSync(outputFolder, {recursive: true})
+
+
+  const files = fs.readdirSync(directoryPath);
+  for (let i = 0; i < files.length; i++) {
+    let file = files[i];
+    if (file.endsWith('.pdf')) {
+      await processSinglePDF(file)
+    }
+    else if (file.endsWith('.odt') || file.endsWith('.ods') || file.endsWith('.odp') || file.endsWith('.odg')) {
+      await processSingleODF(file)
+    }
+
+    let filenameNoExt = path.basename(file)
+    if (filenameNoExt.slice(-4, -3) === '.') {
+      filenameNoExt = filenameNoExt.slice(0, -4)
+    }
+
+    if (filename === filenameNoExt) {
+      continue
+    }
+
+    let cmd = `mv "/output/${filenameNoExt}/*" "/output/${filename}"`
+    console.log(cmd)
+    try {
+      result = await ShellExec(cmd)
+    }
+    catch (e) {
+      console.error(e)
+    }
+
+    cmd = `rm -rf "/output/${filenameNoExt}/"`
+    try {
+      result = await ShellExec(cmd)
+    }
+    catch (e) {
+      console.error(e)
+    }
+  }
+}
+
 
 let processSinglePDF = async function (file) {
   let filename = path.basename(file)
