@@ -86,6 +86,7 @@ let processSinglePDF = async function (file) {
   }
 
   let outputFolder = `/output/${filenameNoExt}/`
+  console.log({outputFolder})
   fs.mkdirSync(outputFolder, {recursive: true})
 
   let result
