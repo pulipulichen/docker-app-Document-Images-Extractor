@@ -34,7 +34,7 @@ function isDirectory(path) {
 
 let processDir = async function (directoryPath) {
   let filename = path.basename(directoryPath)
-  let outputFolder = `/output/${filename}/`
+  let outputFolder = `/output/${filename}-images/`
   fs.mkdirSync(outputFolder, {recursive: true})
 
 
@@ -57,7 +57,7 @@ let processDir = async function (directoryPath) {
       continue
     }
 
-    let cmd = `mv "/output/${filenameNoExt}/"* "/output/${filename}"`
+    let cmd = `mv "/output/${filenameNoExt}/"* "/output/${filename}-images"`
     console.log(cmd)
     try {
       result = await ShellExec(cmd)
