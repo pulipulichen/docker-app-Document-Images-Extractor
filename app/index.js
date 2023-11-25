@@ -160,7 +160,7 @@ let processSingleODF = async function (file) {
 
   cmd = `rm -rf "${outputDocFolder}"`
   try {
-    result = await ShellExec(cmd)
+    // result = await ShellExec(cmd)
   }
   catch (e) {
     console.error(e)
