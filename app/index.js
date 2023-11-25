@@ -51,11 +51,13 @@ let processSingleODF = async function (file) {
   }
 
   let outputFolder = `/output/${filenameNoExt}/`
+  let outputDocFolder = `/output/${filenameNoExt}-doc/`
   fs.mkdirSync(outputFolder, {recursive: true})
+  fs.mkdirSync(outputDocFolder, {recursive: true})
 
   let result
   
-  let cmd = `unzip "${file}" -d "${outputFolder}"`
+  let cmd = `unzip "${file}" -d "${outputDocFolder}"`
   console.log(cmd)
   try {
     result = await ShellExec(cmd)
@@ -64,7 +66,36 @@ let processSingleODF = async function (file) {
     console.error(e)
   }
 
-  // prependFilenameInFolder(filenameNoExt, outputFolder)
+  // ----------------------------------------------------------------
+
+  if (fs.existsSync(`${outputDocFolder}/media/`)) {
+    cmd = `mv "${outputDocFolder}/media/"* "${outputFolder}"`
+  }
+  if (fs.existsSync(`${outputDocFolder}/Pictures/`)) {
+    cmd = `mv "${outputDocFolder}/Pictures/"* "${outputFolder}"`
+  } 
+  // console.log(cmd)
+  try {
+    result = await ShellExec(cmd)
+  }
+  catch (e) {
+    console.error(e)
+  }
+
+  // ----------------------------------------------------------------
+
+  prependFilenameInFolder(filenameNoExt, outputFolder)
+
+  // ----------------------------------------------------------------
+
+
+  cmd = `rm -rf "${outputDocFolder}"`
+  try {
+    result = await ShellExec(cmd)
+  }
+  catch (e) {
+    console.error(e)
+  }
 }
 
 let prependFilenameInFolder = function (prepend, directoryPath) {
