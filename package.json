@@ -1,0 +1,29 @@
+{
+  "name": "docker-app-PDF-to-Images",
+  "version": "1.0.0",
+  "description": "To extract the bookmarks in a PDF file.",
+  "main": "index.js",
+  "scripts": {
+    "start": "docker-compose up",
+    "commit-docker-image": "docker-compose build; bash ./docker-build/image/commit-docker-image.sh",
+    "d0.build": "docker-compose build",
+    "d1.bash": "docker-compose run app bash"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://pulipuli.chen@gmail.com@github.com/pulipulichen/docker-app-PDF-to-Images.git"
+  },
+  "keywords": [
+    "PWA"
+  ],
+  "author": "Pulipuli Chen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pulipulichen/docker-app-PDF-to-Images/issues"
+  },
+  "homepage": "https://github.com/pulipulichen/docker-app-PDF-to-Images#readme",
+  "devDependencies": {
+  },
+  "dependencies": {
+  }
+}
