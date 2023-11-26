@@ -15,7 +15,7 @@ let processDir = async function (directoryPath, processDocument) {
   for (let i = 0; i < files.length; i++) {
     let file = files[i];
     // console.log(processDocument)
-    await processDocument(file, false)
+    await processDocument(path.join(directoryPath, file), false)
 
     let filenameNoExt = path.basename(file)
     if (filenameNoExt.slice(-4, -3) === '.') {
