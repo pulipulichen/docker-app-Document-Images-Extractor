@@ -32,7 +32,7 @@ let main = async function () {
     await ShellSpawn(`mv /output/*/* /output/`)
     await ShellSpawn(`find /output/ -depth -type d -empty -exec rmdir {} +`)
     await ShellSpawn(`find /output/ -depth -type d -empty -exec rmdir {} +`)
-    await ShellSpawn(`find output -type f -name '*' -exec 7z a -r -mx=9 "${output7z}" {} +`)
+    await ShellSpawn(`find /output/ -type f -name '*' -exec 7z a -r -mx=9 "${output7z}" {} +`)
   }
 }
 
