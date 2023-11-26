@@ -7,7 +7,7 @@ const processSingleOffice = require('./processSingleOffice')
 
 let processDocument = async function (file) {
   if (isDirectory(file)) {
-    await processDir(file)
+    await processDir(file, processDocument)
   }
   else if (file.endsWith('.pdf')) {
     await processSinglePDF(file)
