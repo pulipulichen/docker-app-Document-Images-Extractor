@@ -4,9 +4,9 @@ const ShellExec = require('./lib/ShellExec')
 
 const isColab = require('./lib/isColab')
 
-const processDocument = require('./processDocument')
+// const processDocument = require('./processDocument')
 
-let processDir = async function (directoryPath) {
+let processDir = async function (directoryPath, processDocument) {
   let filename = path.basename(directoryPath)
   let outputFolder = `/output/${filename}-images/`
   fs.mkdirSync(outputFolder, {recursive: true})
