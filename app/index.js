@@ -1,6 +1,6 @@
 // const ShellExec = require('./lib/ShellExec')
 const GetFiles = require('./lib/GetFiles')
-// const isColab = require('./lib/isColab')
+const isColab = require('./lib/isColab')
 
 // const isDirectory = require('./lib/isDirectory')
 
