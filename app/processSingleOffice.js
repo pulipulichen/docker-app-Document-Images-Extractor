@@ -63,9 +63,9 @@ let processSingleOffice = async function (file) {
     console.error(e)
   }
 
-  if (isColab) {
-    await ShellSpawn(`cd "${outputFolder}"; zip -r ../"${filenameNoExt}.zip" . -i *`)
-  }
+  // if (isColab) {
+  //   await ShellSpawn(`cd "${outputFolder}"; zip -r ../"${filenameNoExt}.zip" . -i *`)
+  // }
 }
 
 module.exports = processSingleOffice

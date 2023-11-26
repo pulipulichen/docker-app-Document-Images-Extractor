@@ -16,6 +16,10 @@ let main = async function () {
     let file = files[i]
     await processDocument(file, processDocument)
   }
+
+  // if (isColab) {
+  //   await ShellSpawn(`cd "/output/${filename}-images"; zip -r ../"${filename}-images.zip" . -i *`)
+  // }
 }
 
 main()

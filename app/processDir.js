@@ -47,9 +47,9 @@ let processDir = async function (directoryPath, processDocument) {
     }
   }
 
-  if (isColab) {
-    await ShellSpawn(`cd "/output/${filename}-images"; zip -r ../"${filename}-images.zip" . -i *`)
-  }
+  // if (isColab) {
+  //   await ShellSpawn(`cd "/output/${filename}-images"; zip -r ../"${filename}-images.zip" . -i *`)
+  // }
 }
 
 module.exports = processDir

@@ -97,9 +97,9 @@ let processSingleODF = async function (file) {
   }
 
 
-  if (isColab) {
-    await ShellSpawn(`cd "${outputFolder}"; zip -r ../"${filenameNoExt}.zip" . -i *`)
-  }
+  // if (isColab) {
+  //   await ShellSpawn(`cd "${outputFolder}"; zip -r ../"${filenameNoExt}.zip" . -i *`)
+  // }
 }
 
 module.exports = processSingleODF
