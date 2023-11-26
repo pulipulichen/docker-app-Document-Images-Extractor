@@ -14,6 +14,7 @@ let processDir = async function (directoryPath, processDocument) {
   const files = fs.readdirSync(directoryPath);
   for (let i = 0; i < files.length; i++) {
     let file = files[i];
+    console.log(processDocument)
     await processDocument(file)
 
     let filenameNoExt = path.basename(file)
