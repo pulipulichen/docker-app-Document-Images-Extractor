@@ -15,6 +15,10 @@ const processDocument = require('./processDocument')
 let main = async function () {
   let files = GetFiles()
 
+  if (isColab) {
+    await ShellSpawn(`rm -rf /output/*`)
+  }
+
   for (let i = 0; i < files.length; i++) {
     let file = files[i]
     await processDocument(file, processDocument)
