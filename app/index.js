@@ -7,7 +7,7 @@ const isColab = require('./lib/isColab')
 const path = require('path')
 const fs = require('fs')
 
-const ShellExec = require('./lib/ShellExec')
+const ShellSpawn = require('./lib/ShellExec')
 
 const processDocument = require('./processDocument')
 
