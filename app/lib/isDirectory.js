@@ -3,6 +3,7 @@ const fs = require('fs')
 function isDirectory(path) {
   try {
     if (!fs.existsSync(path)) {
+      console.error(`Error checking if "${path}" is existed:`);
       return false
     }
 
