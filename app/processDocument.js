@@ -5,8 +5,10 @@ const processSinglePDF = require('./processSinglePDF')
 const processSingleODF = require('./processSingleODF')
 const processSingleOffice = require('./processSingleOffice')
 
+const path = require('./path')
+
 let processDocument = async function (file) {
-  if (isDirectory(file)) {
+  if (isDirectory(path.join('/input/', file))) {
     await processDir(file, processDocument)
   }
   else if (file.endsWith('.pdf')) {
