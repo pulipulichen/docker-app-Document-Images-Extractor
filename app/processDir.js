@@ -2,7 +2,7 @@ const path = require('path')
 const fs = require('fs')
 const ShellExec = require('./lib/ShellExec')
 
-const isColab = require('./lib/isColab')
+// const isColab = require('./lib/isColab')
 
 // const processDocument = require('./processDocument')
 
