@@ -3,6 +3,7 @@ services:
   app:
     image: pudding/docker-app:docker-app-document-images-extractor-app-20231125.181454
     tty: true
+    user: "${UID}:${GID}"
     command: node /app/index.js "/input/__INPUT__"
     environment:
       - CONTAINER_NAME=docker-app-document-images-extractor-app
